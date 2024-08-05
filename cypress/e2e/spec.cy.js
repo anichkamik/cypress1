@@ -31,6 +31,7 @@ describe('registration user', () => {
     cy.get('[data-qa="continue-button"]').click()
     cy.get(':nth-child(10) > a').should("have.text"," Logged in as useruser")
     cy.get('.shop-menu > .nav > :nth-child(5) > a').click()
+    
   })
 })
 
