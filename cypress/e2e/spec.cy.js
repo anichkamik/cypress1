@@ -1,45 +1,56 @@
-describe('registration user', () => {
-  it('passes', () => {
-    cy.visit('http://automationexercise.com')
-    cy.get('a > img').should("be.visible")
-    cy.get('.shop-menu > .nav > :nth-child(4) > a').click()
-    cy.get('.signup-form > h2').should("be.visible")
-    cy.get('[data-qa="signup-name"]').type("user")
-    cy.get('[data-qa="signup-email"]').type("ejhfnmtail@email.ma")
-    cy.get('[data-qa="signup-button"]').click()
-    cy.get(':nth-child(1) > b').should("be.visible")
-    cy.get('#id_gender2').click()
-    cy.get('[data-qa="name"]').type("user")
-    cy.get('[data-qa="password"]').type("ppassword")
-    cy.get('[data-qa="days"]').select("6")
-    cy.get('[data-qa="months"]').select("November")
-    cy.get('[data-qa="years"]').select("2000")
-    cy.get('#newsletter').click()
-    cy.get('#optin').click()
-    cy.get('[data-qa="first_name"]').type("ana")
-    cy.get('[data-qa="last_name"]').type("mikadze")
-    cy.get('[data-qa="company"]').type("sept")
-    cy.get('[data-qa="address"]').type("Tbilisi,Javakhishvili 73")
-    cy.get('[data-qa="address2"]').type("avakhishvili 73")
-    cy.get('[data-qa="country"]').select("Singapore")
-    cy.get('[data-qa="state"]').type("Tbilisi")
-    cy.get('[data-qa="city"]').type("tbilisi")
-    cy.get('[data-qa="zipcode"]').type("03001")
-    cy.get('[data-qa="mobile_number"]').type("12345678")
-    cy.get('[data-qa="create-account"]').click()
-    cy.get('b').should("be.visible")
-    cy.get('[data-qa="continue-button"]').click()
-    cy.get(':nth-child(10) > a').should("have.text"," Logged in as useruser")
-    cy.get('.shop-menu > .nav > :nth-child(5) > a').click()
-    
-  })
+describe('edit personal detales', () => {
+it('edit', () => {
+cy.login()
+//verify that it's my own account page
+cy.get('.subtext').should("be.visible")
+//edit account details
+cy.get('.side_account_list > :nth-child(3) > a').click()
+cy.get('#AccountFrm_firstname').clear()
+cy.get('#AccountFrm_firstname').type("anna")
+cy.get('#AccountFrm_lastname').clear()
+cy.get('#AccountFrm_lastname').type("Samnidze")
+cy.get('#AccountFrm_email').clear()
+cy.get('#AccountFrm_email').type("anobano007@gmail.com")
+cy.get('#AccountFrm_telephone').clear()
+cy.get('#AccountFrm_telephone').type("12345678")
+cy.get('#AccountFrm_fax').clear()
+cy.get('#AccountFrm_fax').type("12345")
+cy.get('.col-md-12 > .btn-orange').click()
+//verify changed details
+cy.get('.alert').should("have.text","\n×\nSuccess: Your account has been successfully updated.")
+cy.get('.side_account_list > :nth-child(3) > a').click()
+cy.get('#AccountFrm_firstname').should("have.value","anna")
+cy.get('#AccountFrm_lastname').should("have.value","Samnidze")
+cy.get('#AccountFrm_email').should("have.value","anobano007@gmail.com")
+cy.get('#AccountFrm_telephone').should("have.value","12345678")
+cy.get('#AccountFrm_fax').should("have.value","12345")
+//change adress
+cy.get('.side_account_list > :nth-child(5) > a').click()
+cy.get('tr > .pull-right > .btn').click()
+cy.get('#AddressFrm_address_1').clear()
+cy.get('#AddressFrm_address_1').type("batumi")
+cy.get('#AddressFrm_address_2').clear()
+cy.get('#AddressFrm_address_2').type("agmasheneblis qucha")
+cy.get('#AddressFrm_country_id').select("Georgia")
+cy.get('#AddressFrm_zone_id').select("Ajaria")
+cy.get('#AddressFrm_city').clear()
+cy.get('#AddressFrm_city').type("batumi")
+cy.get('#AddressFrm_postcode').clear()
+cy.get('#AddressFrm_postcode').type("7654321")
+cy.get('.col-md-12 > .btn-orange').click()
+cy.get('.alert').should("have.text","\n×\nYour address has been successfully updated")
+//change password
+cy.get('.side_account_list > :nth-child(4) > a').click()
+cy.get('#PasswordFrm_current_password').type("12345678")
+cy.get('#PasswordFrm_password').type("1234567890")
+cy.get('#PasswordFrm_confirm').type("1234567890")
+cy.get('.col-md-12 > .btn-orange').click()
+
+
+
+
+ })
 })
-
-
-
-
-
-
 
 
 
